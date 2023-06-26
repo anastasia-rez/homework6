@@ -29,21 +29,24 @@ actionBtn.addEventListener('click', function(){
         check.innerHTML = 'Данные верные';
 
         let day = curr_date;
-        let month = curr_month;
+        let month = curr_month - 1;
         let year = curr_year;
 
-        let today = new Date();
+        let now = new Date();
+        let today = new Date(now.getFullYear(), now.getMonth(), now.getDate());
         let birth = new Date(year, month, day);
-        let age = today.getFullYear() - birth.getFullYear();
-        let m = today.getMonth() - birth.getMonth();
-            if(m < 0 || (m === 0 && today.getDate() < birth.getDate())) {
-                age --;
-            }
+        let birthNow = new Date(today.getFullYear(), birth.getMonth(), birth.getDate());
+        let age;
+        age = today.getFullYear() - birth.getFullYear();
+        console.log(today);
+        console.log(birth);
+        if(today < birthNow){
+            age = age - 1;
+        }
         checkAge.innerHTML = `Возраст: ${age}`;    
     } else {
         check.innerHTML = 'Проверьте корректность ИНН!';
     }
-
 
     function check_sum(){
         let inn = userCode.value;
